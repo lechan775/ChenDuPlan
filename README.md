@@ -305,17 +305,19 @@ Issues and Pull Requests are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING
 
 ---
 
-## 👤 Author
+## 👥 Core Team
 
-**Guowei Jiang (lechan775)**
+| Role | Name | GitHub |
+|---|---|---|
+| Project Lead & Architect | **Guowei Jiang** | [@lechan775](https://github.com/lechan775) |
+| Core Developer | **tingnuanx** | [@tingnuanx](https://github.com/tingnuanx) |
 
-- GitHub: [@lechan775](https://github.com/lechan775)
-- Email: untapped-word-fit@duck.com
+📧 Contact: untapped-word-fit@duck.com
 
 ---
 
 <div align="center">
-  <p>Made with ❤️ by lechan775</p>
+  <p>Made with ❤️ by lechan775 & tingnuanx</p>
   <p>
     <a href="https://github.com/lechan775"><img src="https://img.shields.io/github/followers/lechan775?label=Follow&style=social" alt="GitHub followers"></a>
     <a href="https://github.com/lechan775/ChenDuPlan/stargazers"><img src="https://img.shields.io/github/stars/lechan775/ChenDuPlan?style=social" alt="GitHub stars"></a>

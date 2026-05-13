@@ -316,17 +316,19 @@ demo_backend/                  # 后端 (Spring Boot)
 
 ---
 
-## 👤 作者
+## 👥 核心团队
 
-**Guowei Jiang (lechan775)**
+| 角色 | 姓名 | GitHub |
+|---|---|---|
+| 项目负责人 & 架构师 | **蒋国伟 (Guowei Jiang)** | [@lechan775](https://github.com/lechan775) |
+| 核心开发者 | **tingnuanx** | [@tingnuanx](https://github.com/tingnuanx) |
 
-- GitHub: [@lechan775](https://github.com/lechan775)
-- 邮箱: untapped-word-fit@duck.com
+📧 联系邮箱: untapped-word-fit@duck.com
 
 ---
 
 <div align="center">
-  <p>Made with ❤️ by lechan775</p>
+  <p>Made with ❤️ by lechan775 & tingnuanx</p>
   <p>
     <a href="https://github.com/lechan775"><img src="https://img.shields.io/github/followers/lechan775?label=Follow&style=social" alt="GitHub followers"></a>
     <a href="https://github.com/lechan775/ChenDuPlan/stargazers"><img src="https://img.shields.io/github/stars/lechan775/ChenDuPlan?style=social" alt="GitHub stars"></a>

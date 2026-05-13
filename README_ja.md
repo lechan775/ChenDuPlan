@@ -122,14 +122,15 @@ demo_backend/                  # バックエンド (Spring Boot)
     └── db/init_words_demo.sql # 初期化スクリプト
 ```
 
----
+## 👥 コアチーム
 
-## 📄 ライセンス
-
-[MIT License](LICENSE)
+| 役割 | 名前 | GitHub |
+|---|---|---|
+| プロジェクトリード | **Guowei Jiang** | [@lechan775](https://github.com/lechan775) |
+| コア開発者 | **tingnuanx** | [@tingnuanx](https://github.com/tingnuanx) |
 
 ---
 
 <div align="center">
-  <p>Made with ❤️ by <a href="https://github.com/lechan775">lechan775</a></p>
+  <p>Made with ❤️ by <a href="https://github.com/lechan775">lechan775</a> & <a href="https://github.com/tingnuanx">tingnuanx</a></p>
 </div>
