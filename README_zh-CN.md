@@ -126,15 +126,33 @@ mysql -u root -p < demo_backend/src/main/resources/db/init_words_demo.sql
 </details>
 
 <details open>
-<summary><b>2. 后端启动</b></summary>
+<summary><b>2. 后端配置与启动</b></summary>
 
+**配置数据库连接**（三选一）：
+
+方式 A：复制环境变量模板（推荐）
+```bash
+cp .env.example .env
+# 编辑 .env 文件，填入你的数据库密码
+```
+
+方式 B：设置系统环境变量
+```bash
+# Windows PowerShell
+$env:DB_URL="jdbc:mysql://localhost:3306/words_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai"
+$env:DB_USERNAME="root"
+$env:DB_PASSWORD="your_password"
+```
+
+方式 C：直接编辑 `application.properties`
+```bash
+cp demo_backend/src/main/resources/application.properties.example demo_backend/src/main/resources/application.properties
+# 编辑 application.properties，替换 ${...} 占位符为真实值
+```
+
+**编译并启动**：
 ```bash
 cd demo_backend
-
-# 修改数据库连接（如需要）
-# 编辑 src/main/resources/application.properties
-
-# 编译并启动
 mvn spring-boot:run
 ```
 

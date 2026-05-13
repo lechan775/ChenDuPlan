@@ -126,15 +126,33 @@ This will:
 </details>
 
 <details open>
-<summary><b>2. Backend Launch</b></summary>
+<summary><b>2. Backend Configuration &amp; Launch</b></summary>
 
+**Configure database connection** (choose one):
+
+Option A: Copy environment template (recommended)
+```bash
+cp .env.example .env
+# Edit .env with your database credentials
+```
+
+Option B: Set system environment variables
+```bash
+# Linux / macOS
+export DB_URL="jdbc:mysql://localhost:3306/words_demo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai"
+export DB_USERNAME="root"
+export DB_PASSWORD="your_password"
+```
+
+Option C: Edit application.properties directly
+```bash
+cp demo_backend/src/main/resources/application.properties.example demo_backend/src/main/resources/application.properties
+# Replace ${...} placeholders with real values
+```
+
+**Build &amp; run**:
 ```bash
 cd demo_backend
-
-# Update database credentials if needed
-# Edit src/main/resources/application.properties
-
-# Build & run
 mvn spring-boot:run
 ```
 
