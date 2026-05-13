@@ -1,0 +1,66 @@
+# ============================================
+# Maven local repository (must NOT be committed)
+# ============================================
+.m2/
+
+# ============================================
+# HarmonyOS / DevEco Studio
+# ============================================
+**/.idea/
+**/.hvigor/
+**/oh_modules/
+**/local.properties
+**/.preview/
+**/build/
+**/.cxx/
+
+# HarmonyOS generated
+**/node_modules/
+**/oh-package-lock.json5
+
+# ============================================
+# Java / Spring Boot / Maven
+# ============================================
+**/target/
+**/.mvn/wrapper/maven-wrapper.jar
+**/.mvn/wrapper/maven-wrapper.properties
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+# ============================================
+# IDE
+# ============================================
+**/.classpath
+**/.project
+**/.settings/
+**/.vscode/
+**/*.iml
+**/*.iws
+**/*.ipr
+
+# ============================================
+# Generated / cache
+# ============================================
+_video_frames/
+*.pyc
+__pycache__/
+
+# ============================================
+# Sensitive config (use .example template instead)
+# ============================================
+**/application.properties
+!**/application.properties.example
+
+# ============================================
+# OS
+# ============================================
+**/.DS_Store
+**/Thumbs.db
+**/desktop.ini
+
+# ============================================
+# Logs & temp
+# ============================================
+**/*.log
+**/tmp/
+**/temp/

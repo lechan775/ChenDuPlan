@@ -1,0 +1,122 @@
+### 注册
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "account": "test001",
+  "password": "123456",
+  "nickname": "测试用户"
+}
+
+### 登录
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "account": "test001",
+  "password": "123456"
+}
+
+### 获取词书列表
+GET http://localhost:8080/api/books
+
+### 获取某本词书的单词
+GET http://localhost:8080/api/words?bookId=1
+
+### 获取学习记录
+GET http://localhost:8080/api/study-records?userId=1
+
+### 获取生词本
+GET http://localhost:8080/api/notebook-words?userId=1
+
+### 获取错题本
+GET http://localhost:8080/api/wrong-words?userId=1
+
+### 获取个人资料
+GET http://localhost:8080/api/user/profile?userId=1
+
+### 修改个人资料
+PUT http://localhost:8080/api/user/profile
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "nickname": "Morning Reader",
+  "dailyTarget": 40,
+  "signature": "Keep learning every day",
+  "selectedBookId": 2
+}
+
+### 提交答题结果：答错
+POST http://localhost:8080/api/study/submit
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "bookTitle": "四级高频词汇",
+  "wordId": 1,
+  "word": "aband",
+  "meaning": "放弃；抛弃",
+  "isCorrect": false,
+  "selectedAnswer": "出现；显现",
+  "correctAnswer": "放弃；抛弃",
+  "sentence": "Do not abandon your daily plan.",
+  "reason": "选择了相近但错误的释义"
+}
+
+### 提交答题结果：答对
+POST http://localhost:8080/api/study/submit
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "bookTitle": "四级高频词汇",
+  "wordId": 2,
+  "word": "benefit",
+  "meaning": "益处；有益于",
+  "isCorrect": true,
+  "selectedAnswer": "益处；有益于",
+  "correctAnswer": "益处；有益于",
+  "sentence": "Reading aloud can benefit your memory.",
+  "reason": ""
+}
+
+### 加入生词本
+POST http://localhost:8080/api/notebook-words
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "wordId": 1,
+  "word": "abandon",
+  "meaning": "放弃；抛弃",
+  "bookTitle": "四级高频词汇",
+  "masteryLabel": "待复习",
+  "nextReview": "2026-04-23",
+  "noteText": "常见搭配 abandon a plan。"
+}
+
+### 删除生词本记录
+DELETE http://localhost:8080/api/notebook-words/3?userId=1
+
+### 删除错题本记录
+DELETE http://localhost:8080/api/wrong-words/2?userId=1
+
+### 获取首页统计
+GET http://localhost:8080/api/stats/overview?userId=1
+
+### 获取词书学习进度
+GET http://localhost:8080/api/books/progress?userId=1
+
+### 获取下一道练习单词
+GET http://localhost:8080/api/words/next?bookId=1
+
+### 外部 API 查词
+GET http://localhost:8080/api/words/search?keyword=hello
+
+###
+GET http://localhost:8080/api/words/search?keyword=apple
+
+### 获取词书学习进度
+GET http://localhost:8080/api/books/progress?userId=1
+

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #fff;
+    font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif;
+    padding: 16px 24px;
+  }
+  h1 { font-size: 16px; color: #1a1a2e; margin-bottom: 8px; font-weight: 700; text-align: center; }
+  .mermaid {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .mermaid svg {
+    width: 100% !important;
+    height: auto !important;
+    max-width: 100%;
+  }
+  .footer-notes {
+    margin: 12px auto 0;
+    max-width: 1200px;
+    padding: 8px 12px;
+    background: #f5f7fa;
+    border-radius: 4px;
+    font-size: 10px;
+    color: #555;
+    line-height: 1.5;
+  }
+  .footer-notes b { color: #333; }
+</style>
+</head>
+<body>
+<h1>鸿蒙背单词 App · MySQL 数据库 ER 图 (words_demo)</h1>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<div class="mermaid">
+erDiagram
+    books {
+        BIGINT id PK
+        VARCHAR title "词书名"
+        VARCHAR level_tag "等级"
+        VARCHAR description "描述"
+        INT total_words "总词数"
+        VARCHAR accent_color "强调色"
+        VARCHAR soft_color "柔和色"
+        DATETIME created_at
+        DATETIME updated_at
+    }
+    users {
+        BIGINT id PK
+        VARCHAR account UK "账号"
+        VARCHAR password_hash "密码哈希"
+        VARCHAR nickname "昵称"
+        INT daily_target "每日目标"
+        VARCHAR signature "签名"
+        BIGINT selected_book_id "当前词书"
+        INT total_learned_words "累计已学"
+        INT streak_days "连续打卡"
+        INT accuracy_rate "正确率%"
+        INT review_due "待复习"
+        DATETIME created_at
+        DATETIME updated_at
+    }
+    user_books {
+        BIGINT id PK
+        BIGINT user_id FK "用户ID"
+        BIGINT book_id FK "词书ID"
+        INT learned_words "已学词数"
+        INT today_new "今日新学"
+        INT today_review "今日复习"
+        INT progress "进度%"
+        DATETIME created_at
+        DATETIME updated_at
+    }
+    words {
+        BIGINT id PK
+        BIGINT book_id FK "词书ID"
+        VARCHAR word "单词"
+        VARCHAR phonetic "音标"
+        VARCHAR meaning "释义"
+        VARCHAR memory_tip "记忆技巧"
+        VARCHAR example_text "例句"
+        VARCHAR translation_text "译文"
+        VARCHAR answer "答案"
+        VARCHAR difficulty "难度"
+        DATETIME created_at
+        DATETIME updated_at
+    }
+    notebook_words {
+        BIGINT id PK
+        BIGINT user_id FK "用户ID"
+        BIGINT word_id "单词ID"
+        VARCHAR word "单词"
+        VARCHAR meaning "释义"
+        VARCHAR book_title "来源词书"
+        VARCHAR mastery_label "掌握度"
+        DATE next_review "下次复习"
+        DATETIME added_at "加入时间"
+        VARCHAR note_text "笔记"
+        DATETIME created_at
+        DATETIME updated_at
+    }
+    wrong_words {
+        BIGINT id PK
+        BIGINT user_id FK "用户ID"
+        BIGINT word_id "单词ID"
+        VARCHAR word "单词"
+        VARCHAR meaning "释义"
+        VARCHAR book_title "来源词书"
+        INT wrong_count "错误次数"
+        DATETIME last_wrong_at "最后答错"
+        VARCHAR sentence_text "答错句子"
+        VARCHAR reason_text "错误原因"
+        DATETIME created_at
+        DATETIME updated_at
+    }
+    study_records {
+        BIGINT id PK
+        BIGINT user_id FK "用户ID"
+        DATE study_date "日期"
+        VARCHAR book_title "词书"
+        INT new_count "新学"
+        INT review_count "复习"
+        INT correct_rate "正确率%"
+        INT finished_words "完成词数"
+        INT duration_minutes "时长min"
+        DATETIME created_at
+        DATETIME updated_at
+    }
+    sign_records {
+        BIGINT id PK
+        BIGINT user_id FK "用户ID"
+        DATE sign_date "签到日期"
+        DATETIME created_at
+    }
+    books ||--o{ user_books : "1:N"
+    books ||--o{ words : "1:N"
+    users ||--o{ user_books : "1:N"
+    users ||--o{ notebook_words : "1:N"
+    users ||--o{ wrong_words : "1:N"
+    users ||--o{ study_records : "1:N"
+    users ||--o{ sign_records : "1:N"
+</div>
+<div class="footer-notes">
+<b>8 表 · 7 条外键关系</b> | user_books 为 users↔books 多对多关联表（含学习进度） | notebook_words / wrong_words 冗余存储 word/meaning/book_title 避免回表 | utf8mb4_unicode_ci 字符集
+</div>
+<script>
+  mermaid.initialize({ 
+    startOnLoad: true, 
+    theme: 'default',
+    er: { 
+      diagramPadding: 20,
+      fontSize: 12,
+      useMaxWidth: true
+    }
+  });
+</script>
+</body>
+</html>

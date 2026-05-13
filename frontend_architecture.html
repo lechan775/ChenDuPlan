@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>鸿蒙背单词 App · 前端页面架构图</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Microsoft YaHei', 'PingFang SC', -apple-system, sans-serif;
+    background: #FFF8F3;
+    color: #2F2A24;
+    padding: 30px;
+    line-height: 1.6;
+  }
+  h1 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 4px;
+    color: #1a1a2e;
+  }
+  .subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 30px;
+  }
+
+  /* Architecture diagram */
+  .arch-container {
+    max-width: 1200px;
+    margin: 0 auto 40px;
+  }
+  .arch-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    border-left: 4px solid #F97316;
+    color: #2F2A24;
+  }
+
+  /* Nodes */
+  .node {
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin: 8px;
+    display: inline-block;
+    text-align: center;
+    font-weight: 600;
+    font-size: 14px;
+  }
+  .node-auth { background: #FFF7ED; border: 2px solid #F97316; color: #F97316; }
+  .node-main { background: #FFE7CF; border: 2px solid #E07B1A; color: #2F2A24; min-width: 160px; }
+  .node-tab  { background: #FFFDF9; border: 2px solid #F4A261; color: #2F2A24; }
+  .node-page { background: #FFF5EA; border: 2px dashed #F2B26A; color: #2F2A24; }
+  .node-sub  { background: #fff; border: 1px solid #E8D2BF; color: #6B6258; font-size: 12px; }
+
+  .row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center; }
+  .col { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .arrow {
+    font-size: 24px;
+    color: #C9B8A6;
+    font-weight: bold;
+  }
+  .arrow-down {
+    font-size: 18px;
+    color: #C9B8A6;
+    text-align: center;
+    padding: 4px 0;
+  }
+  .divider-v { width: 2px; height: 30px; background: #E8D2BF; border-radius: 1px; }
+
+  /* Cards detail section */
+  .pages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .page-card {
+    background: #FFFDF9;
+    border-radius: 20px;
+    padding: 20px;
+    border: 1px solid #F3E4D5;
+  }
+  .page-card h3 {
+    font-size: 16px;
+    margin-bottom: 4px;
+    color: #2F2A24;
+  }
+  .page-card .file {
+    font-size: 11px;
+    color: #C9B8A6;
+    margin-bottom: 12px;
+    font-family: 'Consolas', 'Courier New', monospace;
+  }
+  .page-card .api-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 10px;
+    margin: 3px 4px 3px 0;
+    font-weight: 600;
+  }
+  .api-get  { background: #E8FFFB; color: #0EA5A4; }
+  .api-post { background: #FFF1E6; color: #F97316; }
+  .api-put  { background: #F4EDFF; color: #7C3AED; }
+  .api-del  { background: #FEE2E2; color: #DC2626; }
+
+  .layout-list {
+    list-style: none;
+    margin-top: 10px;
+  }
+  .layout-list li {
+    font-size: 13px;
+    padding: 4px 0;
+    color: #6B6258;
+    border-bottom: 1px dashed #F3E4D5;
+  }
+  .layout-list li::before { content: '▸ '; color: #F4A261; }
+  .layout-list li:last-child { border-bottom: none; }
+
+  .color-bar {
+    display: flex;
+    gap: 10px;
+    margin-top: 12px;
+    flex-wrap: wrap;
+  }
+  .color-swatch {
+    width: 20px; height: 20px;
+    border-radius: 6px;
+    display: inline-block;
+    border: 1px solid #E8D2BF;
+  }
+  .color-label { font-size: 11px; color: #8A8179; margin-left: 4px; }
+</style>
+</head>
+<body>
+
+<h1>鸿蒙背单词 App · 前端页面架构</h1>
+<div class="subtitle">HarmonyOS ArkUI (ArkTS) · 7 页面 · 11 个 Controller · 22 个 API 端点</div>
+
+<!-- Architecture Flow -->
+<div class="arch-container">
+  <div class="arch-title">📱 页面导航拓扑</div>
+
+  <div style="display:flex; flex-direction:column; align-items:center; gap: 8px;">
+
+    <!-- Auth layer -->
+    <div class="row">
+      <div class="node node-auth">LoginPage</div>
+      <span class="arrow">⇄</span>
+      <div class="node node-auth">RegisterPage</div>
+    </div>
+
+    <div class="arrow-down">▼</div>
+
+    <!-- MainPage with Tabs -->
+    <div class="node node-main" style="min-width: 220px;">MainPage<br><span style="font-size:11px;font-weight:400;">底部 3 Tab 导航</span></div>
+
+    <!-- Tabs row -->
+    <div class="row" style="margin-top: 8px;">
+      <div class="col">
+        <div class="node node-tab">Tab1 · 背词<br><span style="font-size:11px;font-weight:400;">StudyHomeTab</span></div>
+        <div class="arrow-down">│</div>
+        <div class="node node-sub">统计卡片<br>+ 今日进度</div>
+        <div class="arrow-down">↓</div>
+        <div class="node node-page">StudyPracticePage<br><span style="font-size:11px;font-weight:400;">选择题背词</span></div>
+      </div>
+
+      <div class="col">
+        <div class="node node-tab">Tab2 · 词书<br><span style="font-size:11px;font-weight:400;">BookTab</span></div>
+        <div class="arrow-down">│</div>
+        <div class="node node-sub">Swiper 轮播<br>励志语 ×3</div>
+        <div class="arrow-down">│</div>
+        <div class="node node-sub">词书卡片<br>进度条+"设为当前"</div>
+      </div>
+
+      <div class="col">
+        <div class="node node-tab">Tab3 · 我的<br><span style="font-size:11px;font-weight:400;">MineTab</span></div>
+        <div class="arrow-down">│</div>
+        <div class="node node-sub">头像 + 昵称<br>+ 4 个入口</div>
+        <div class="arrow-down">├─┬─┬─┐</div>
+        <div style="display:flex; gap:6px; flex-wrap:wrap; justify-content:center;">
+          <div class="node node-page" style="min-width:80px;font-size:12px;">生词本</div>
+          <div class="node node-page" style="min-width:80px;font-size:12px;">错题本</div>
+          <div class="node node-page" style="min-width:80px;font-size:12px;">学习记录</div>
+          <div class="node node-page" style="min-width:80px;font-size:12px;">个人资料</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Page Detail Cards -->
+<div class="arch-container">
+  <div class="arch-title">📄 逐页详情</div>
+  <div class="pages-grid">
+
+    <!-- LoginPage -->
+    <div class="page-card">
+      <h3>🔐 LoginPage</h3>
+      <div class="file">pages/LoginPage.ets</div>
+      <span class="api-tag api-post">POST /api/auth/login</span>
+      <ul class="layout-list">
+        <li>Logo "W" 圆形图标 (F97316)</li>
+        <li>标题 "晨读计划" (28sp Bold)</li>
+        <li>副标题 "坚持学习，让每天的进步看得见"</li>
+        <li>账号输入框 (FFF7ED 背景, 圆角18px)</li>
+        <li>密码输入框</li>
+        <li>提示 "每次启动需重新登录"</li>
+        <li>登录按钮 (F97316 橙色, 22px 圆角)</li>
+        <li>底部链接 "还没有账号？去注册"</li>
+      </ul>
+    </div>
+
+    <!-- RegisterPage -->
+    <div class="page-card">
+      <h3>📝 RegisterPage</h3>
+      <div class="file">pages/RegisterPage.ets</div>
+      <span class="api-tag api-post">POST /api/auth/register</span>
+      <ul class="layout-list">
+        <li>顶部返回按钮 "&lt; 返回"</li>
+        <li>Logo "W" + 标题 "创建账号"</li>
+        <li>账号输入框</li>
+        <li>昵称输入框 (可选)</li>
+        <li>密码输入框 (至少6位, InputType.Password)</li>
+        <li>确认密码输入框 (校验一致性)</li>
+        <li>"注册并登录" 按钮</li>
+        <li>底部 "已有账号？返回登录"</li>
+      </ul>
+    </div>
+
+    <!-- MainPage + StudyHomeTab -->
+    <div class="page-card">
+      <h3>🏠 MainPage · 背词 Tab</h3>
+      <div class="file">pages/MainPage.ets (StudyHomeTab 内嵌)</div>
+      <span class="api-tag api-get">GET /api/user/profile</span>
+      <span class="api-tag api-get">GET /api/stats/overview</span>
+      <span class="api-tag api-get">GET /api/books/progress</span>
+      <ul class="layout-list">
+        <li>顶部三栏统计: 累计词数 | 连续天 | 正确率</li>
+        <li>今日进度: 已完成 X/目标 词</li>
+        <li>进度条环形 / 线性条 (F97316)</li>
+        <li>词书下拉: 当前词书名 + 切换</li>
+        <li>学习模式: "新学" / "复习" 双按钮</li>
+        <li>核心按钮: "开始背词" → 进入 StudyPracticePage</li>
+        <li>底部 3 Tab 导航: 背词 | 词书 | 我的</li>
+      </ul>
+    </div>
+
+    <!-- StudyPracticePage -->
+    <div class="page-card">
+      <h3>🎯 StudyPracticePage (练习页)</h3>
+      <div class="file">内嵌于 MainPage.ets</div>
+      <span class="api-tag api-get">GET /api/words/next</span>
+      <span class="api-tag api-post">POST /api/study/submit</span>
+      <span class="api-tag api-post">POST /api/notebook-words</span>
+      <ul class="layout-list">
+        <li>全屏沉浸模式 (替换 MainPage Tab 层)</li>
+        <li>顶部: 进度指示器 (第 X/总数 题)</li>
+        <li>单词卡片: 单词(22sp Bold) + 音标 + 释义</li>
+        <li>点击可查看: 记忆技巧 + 例句 + 译文</li>
+        <li>4 个选项按钮 (圆角18px, 点击高亮)</li>
+        <li>选错: 红色 "再记" 标签 + 正确答案标绿</li>
+        <li>底部三按钮: "加入生词本" | "退出练习" | "提交下一题"</li>
+      </ul>
+    </div>
+
+    <!-- BookTab -->
+    <div class="page-card">
+      <h3>📚 BookTab · 词书页面</h3>
+      <div class="file">内嵌于 MainPage.ets</div>
+      <span class="api-tag api-get">GET /api/books/progress</span>
+      <ul class="layout-list">
+        <li>Swiper 轮播组件 (3 页励志语, 3.2s 自动)</li>
+        <li>轮播指示器 (dot 样式, F97316 选中色)</li>
+        <li>每页: 背景图 + 半透明遮罩 + 白色标题</li>
+        <li>词书卡片列表 (循环渲染 bookList)</li>
+        <li>每张卡片: 标题 + 等级标签 + 描述</li>
+        <li>三栏数据: 总词数 | 已学 | 待复习</li>
+        <li>线性进度条 (accentColor 配色)</li>
+        <li>"当前词书" / "设为当前" 切换按钮</li>
+      </ul>
+    </div>
+
+    <!-- MineTab -->
+    <div class="page-card">
+      <h3>👤 MineTab · 我的</h3>
+      <div class="file">内嵌于 MainPage.ets</div>
+      <span class="api-tag api-get">GET /api/notebook-words</span>
+      <span class="api-tag api-get">GET /api/wrong-words</span>
+      <span class="api-tag api-get">GET /api/study-records</span>
+      <ul class="layout-list">
+        <li>头像区: 82×82 橙色圆形 + 昵称(22sp Bold)</li>
+        <li>菜单入口列表 (FFFDF9 底, 圆角24px)</li>
+        <li>• 我的生词本 → N个词 → CollectionPage</li>
+        <li>• 错题本 → N条待复盘 → WrongBookPage</li>
+        <li>• 学习记录 → N天记录 → StudyRecordPage</li>
+        <li>• 个人资料 → 当前词书 → ProfilePage</li>
+        <li>逐个条目右箭头 ">" 橙色</li>
+        <li>底部 "退出登录" 按钮 (浅橙底)</li>
+      </ul>
+    </div>
+
+    <!-- CollectionPage -->
+    <div class="page-card">
+      <h3>📖 CollectionPage · 生词本</h3>
+      <div class="file">pages/CollectionPage.ets</div>
+      <span class="api-tag api-get">GET /api/notebook-words</span>
+      <span class="api-tag api-del">DELETE /api/notebook-words/{id}</span>
+      <ul class="layout-list">
+        <li>顶部返回栏 "&lt; 返回  我的生词本"</li>
+        <li>Loading 状态 (转圈 + 文字)</li>
+        <li>空状态: "暂无生词" + 引导文字</li>
+        <li>单词卡片: 单词(22sp) + 释义(14sp)</li>
+        <li>右上角: 掌握度标签 (FFF1E6 底)</li>
+        <li>删除按钮 (红色 FEE2E2 底, 弹窗确认)</li>
+        <li>底部元信息行: 词书名 | 加入日期 | 下次复习</li>
+        <li>用户笔记 (notetext, 13sp)</li>
+      </ul>
+    </div>
+
+    <!-- WrongBookPage -->
+    <div class="page-card">
+      <h3>❌ WrongBookPage · 错题本</h3>
+      <div class="file">pages/WrongBookPage.ets</div>
+      <span class="api-tag api-get">GET /api/wrong-words</span>
+      <span class="api-tag api-del">DELETE /api/wrong-words/{id}</span>
+      <ul class="layout-list">
+        <li>顶部返回栏 "&lt; 返回  错题本"</li>
+        <li>错误卡片: 单词 + 释义</li>
+        <li>红色标签 "错误 N 次" (FEE2E2 底)</li>
+        <li>删除按钮 (弹窗确认)</li>
+        <li>来源词书 + 最近错误时间</li>
+        <li>答错句子原文 (14sp, #4B5563)</li>
+        <li>错误原因: "错误原因：xxx" (13sp)</li>
+      </ul>
+    </div>
+
+    <!-- StudyRecordPage -->
+    <div class="page-card">
+      <h3>📊 StudyRecordPage · 学习记录</h3>
+      <div class="file">pages/StudyRecordPage.ets</div>
+      <span class="api-tag api-get">GET /api/study-records</span>
+      <span class="api-tag api-get">GET /api/stats/overview</span>
+      <ul class="layout-list">
+        <li>顶部返回栏 + 三栏统计摘要卡</li>
+        <li>连续学习 X天 | 累计完成 X词 | 平均正确率 X%</li>
+        <li>🎯 月日历打卡视图 (核心亮点)</li>
+        <li>月标题: "2026年5月"</li>
+        <li>星期头: 一 二 三 四 五 六 日</li>
+        <li>7×N Grid 日期格, 学习日橙色圆底</li>
+        <li>今日蓝色边框高亮, 非当月灰色</li>
+        <li>底部提示 "橙色圆点表示当天有学习记录"</li>
+        <li>学习流水列表 (日期+词书+新学/复习/正确率)</li>
+      </ul>
+    </div>
+
+    <!-- ProfilePage -->
+    <div class="page-card">
+      <h3>⚙️ ProfilePage · 个人资料</h3>
+      <div class="file">pages/ProfilePage.ets</div>
+      <span class="api-tag api-get">GET /api/user/profile</span>
+      <span class="api-tag api-put">PUT /api/user/profile</span>
+      <span class="api-tag api-get">GET /api/books</span>
+      <ul class="layout-list">
+        <li>返回栏 "&lt; 返回  个人资料"</li>
+        <li>头像 + 昵称 + "默认词书：XXX"</li>
+        <li>错误消息区 (E45B5B 红色, 有错误时显示)</li>
+        <li>昵称输入框 (校验非空)</li>
+        <li>每日学习目标输入框 (校验>0)</li>
+        <li>学习签名输入框</li>
+        <li>"保存并返回" 按钮 → PUT /api/user/profile</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Color Palette -->
+<div class="arch-container">
+  <div class="arch-title">🎨 全局色彩体系</div>
+  <div class="page-card" style="max-width:600px;">
+    <div class="color-bar">
+      <div><span class="color-swatch" style="background:#FFF8F3;"></span><span class="color-label">底色 #FFF8F3</span></div>
+      <div><span class="color-swatch" style="background:#FFFDF9;"></span><span class="color-label">卡片 #FFFDF9</span></div>
+      <div><span class="color-swatch" style="background:#FFE7CF;"></span><span class="color-label">重点卡 #FFE7CF</span></div>
+      <div><span class="color-swatch" style="background:#FFF7ED;"></span><span class="color-label">输入框 #FFF7ED</span></div>
+    </div>
+    <div class="color-bar" style="margin-top:6px;">
+      <div><span class="color-swatch" style="background:#F97316;"></span><span class="color-label">强调色 #F97316</span></div>
+      <div><span class="color-swatch" style="background:#2F2A24;"></span><span class="color-label">主文字 #2F2A24</span></div>
+      <div><span class="color-swatch" style="background:#7C6754;"></span><span class="color-label">次要字 #7C6754</span></div>
+      <div><span class="color-swatch" style="background:#DC2626;"></span><span class="color-label">错误色 #DC2626</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- Summary table -->
+<div class="arch-container">
+  <div class="arch-title">📋 页面 × API 映射总表</div>
+  <table style="width:100%;max-width:1100px;margin:0 auto;border-collapse:collapse;background:#FFFDF9;border-radius:16px;overflow:hidden;font-size:13px;">
+    <thead>
+      <tr style="background:#FFE7CF;">
+        <th style="padding:10px 14px;text-align:left;">页面</th>
+        <th style="padding:10px 14px;text-align:left;">调用的 API</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #F3E4D5;"><td style="padding:10px 14px;font-weight:600;">LoginPage</td><td style="padding:10px 14px;"><code>POST /api/auth/login</code></td></tr>
+      <tr style="border-bottom:1px solid #F3E4D5;"><td style="padding:10px 14px;font-weight:600;">RegisterPage</td><td style="padding:10px 14px;"><code>POST /api/auth/register</code></td></tr>
+      <tr style="border-bottom:1px solid #F3E4D5;"><td style="padding:10px 14px;font-weight:600;">MainPage</td><td style="padding:10px 14px;"><code>GET /api/user/profile</code> · <code>GET /api/stats/overview</code> · <code>GET /api/books/progress</code> · <code>GET /api/notebook-words</code> · <code>GET /api/wrong-words</code> · <code>GET /api/study-records</code></td></tr>
+      <tr style="border-bottom:1px solid #F3E4D5;"><td style="padding:10px 14px;font-weight:600;">StudyPracticePage</td><td style="padding:10px 14px;"><code>GET /api/words/next</code> · <code>POST /api/study/submit</code> · <code>POST /api/notebook-words</code></td></tr>
+      <tr style="border-bottom:1px solid #F3E4D5;"><td style="padding:10px 14px;font-weight:600;">CollectionPage</td><td style="padding:10px 14px;"><code>GET /api/notebook-words</code> · <code>DELETE /api/notebook-words/{id}</code></td></tr>
+      <tr style="border-bottom:1px solid #F3E4D5;"><td style="padding:10px 14px;font-weight:600;">WrongBookPage</td><td style="padding:10px 14px;"><code>GET /api/wrong-words</code> · <code>DELETE /api/wrong-words/{id}</code></td></tr>
+      <tr style="border-bottom:1px solid #F3E4D5;"><td style="padding:10px 14px;font-weight:600;">StudyRecordPage</td><td style="padding:10px 14px;"><code>GET /api/study-records</code> · <code>GET /api/stats/overview</code></td></tr>
+      <tr><td style="padding:10px 14px;font-weight:600;">ProfilePage</td><td style="padding:10px 14px;"><code>GET /api/user/profile</code> · <code>PUT /api/user/profile</code> · <code>GET /api/books</code></td></tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

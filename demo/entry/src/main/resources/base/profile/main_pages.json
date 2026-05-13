@@ -1,0 +1,11 @@
+{
+  "src": [
+    "pages/LoginPage",
+    "pages/RegisterPage",
+    "pages/MainPage",
+    "pages/CollectionPage",
+    "pages/WrongBookPage",
+    "pages/StudyRecordPage",
+    "pages/ProfilePage"
+  ]
+}
