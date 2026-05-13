@@ -1,7 +1,5 @@
 <div align="center">
-  <p>
-    <img width="100%" src="https://img.shields.io/badge/HarmonyOS-Next-FF6600?style=for-the-badge&logo=harmonyos&logoColor=white" alt="HarmonyOS Next">
-  </p>
+  <img width="100%" src="https://cdn.jsdelivr.net/gh/lechan775/ChenDuPlan@master/docs/blog-cover.png" alt="ChenDu Plan Cover">
 
 **English** | [简体中文](README_zh-CN.md) | [日本語](README_ja.md)
 
