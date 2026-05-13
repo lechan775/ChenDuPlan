@@ -23,19 +23,19 @@
 
 | 登录 | 注册 | 背词首页 |
 |---|---|---|
-| ![login](https://raw.githubusercontent.com/lechan775/ChenDuPlan/master/docs/screenshots/login.png) | ![register](https://raw.githubusercontent.com/lechan775/ChenDuPlan/master/docs/screenshots/register.png) | ![quiz](https://raw.githubusercontent.com/lechan775/ChenDuPlan/master/docs/screenshots/home_quiz.png) |
+| ![login](https://cdn.jsdelivr.net/gh/lechan775/ChenDuPlan@master/docs/screenshots/login.png) | ![register](https://cdn.jsdelivr.net/gh/lechan775/ChenDuPlan@master/docs/screenshots/register.png) | ![quiz](https://cdn.jsdelivr.net/gh/lechan775/ChenDuPlan@master/docs/screenshots/home_quiz.png) |
 
 ### 核心功能页
 
 | 词书切换 | 背词练习 | 个人中心 |
 |---|---|---|
-| ![books](https://raw.githubusercontent.com/lechan775/ChenDuPlan/master/docs/screenshots/home_books.png) | ![practice](https://raw.githubusercontent.com/lechan775/ChenDuPlan/master/docs/screenshots/studypractice.png) | ![profile](https://raw.githubusercontent.com/lechan775/ChenDuPlan/master/docs/screenshots/home_profile.png) |
+| ![books](https://cdn.jsdelivr.net/gh/lechan775/ChenDuPlan@master/docs/screenshots/home_books.png) | ![practice](https://cdn.jsdelivr.net/gh/lechan775/ChenDuPlan@master/docs/screenshots/studypractice.png) | ![profile](https://cdn.jsdelivr.net/gh/lechan775/ChenDuPlan@master/docs/screenshots/home_profile.png) |
 
 ### 学习工具
 
 | 生词本 | 错题本 |
 |---|---|
-| ![notebook](https://raw.githubusercontent.com/lechan775/ChenDuPlan/master/docs/screenshots/notebook.png) | ![wrongbook](https://raw.githubusercontent.com/lechan775/ChenDuPlan/master/docs/screenshots/wrongbook.png) |
+| ![notebook](https://cdn.jsdelivr.net/gh/lechan775/ChenDuPlan@master/docs/screenshots/notebook.png) | ![wrongbook](https://cdn.jsdelivr.net/gh/lechan775/ChenDuPlan@master/docs/screenshots/wrongbook.png) |
 
 ---
 
@@ -90,7 +90,7 @@
 
 8 张业务表，以 `users` 和 `books` 为中心：
 
-![ER Diagram](https://raw.githubusercontent.com/lechan775/ChenDuPlan/master/er_diagram_ppt.png)
+![ER Diagram](https://cdn.jsdelivr.net/gh/lechan775/ChenDuPlan@master/er_diagram_ppt.png)
 
 | 表 | 职责 |
 |---|---|
