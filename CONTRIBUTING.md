@@ -29,6 +29,13 @@ We follow [Conventional Commits](https://www.conventionalcommits.org/):
 - **Java**: Follow standard Java conventions (4-space indentation, camelCase)
 - **SQL**: Use lowercase for table/column names with underscore separation
 
+## Core Team
+
+| Member | Role | GitHub |
+|---|---|---|
+| [Guowei Jiang](https://github.com/lechan775) | Project Lead & Architect | [@lechan775](https://github.com/lechan775) |
+| [tingnuanx](https://github.com/tingnuanx) | Core Contributor | [@tingnuanx](https://github.com/tingnuanx) |
+
 ## Questions?
 
 Open an [Issue](https://github.com/lechan775/ChenDuPlan/issues) or contact the maintainer at untapped-word-fit@duck.com.
