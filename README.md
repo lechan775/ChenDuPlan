@@ -101,6 +101,29 @@ flowchart LR
 
 ---
 
+
+## 📱 Screenshots
+
+<table>
+<tr>
+  <td align="center"><b>Login</b><br><img src="docs/screenshots/login.png" width="200"/></td>
+  <td align="center"><b>Register</b><br><img src="docs/screenshots/register.png" width="200"/></td>
+  <td align="center"><b>Quiz (Home Tab)</b><br><img src="docs/screenshots/home_quiz.png" width="200"/></td>
+</tr>
+<tr>
+  <td align="center"><b>Word Books</b><br><img src="docs/screenshots/home_books.png" width="200"/></td>
+  <td align="center"><b>Study Practice</b><br><img src="docs/screenshots/studypractice.png" width="200"/></td>
+  <td align="center"><b>Profile (Mine Tab)</b><br><img src="docs/screenshots/home_profile.png" width="200"/></td>
+</tr>
+<tr>
+  <td align="center"><b>Notebook</b><br><img src="docs/screenshots/notebook.png" width="200"/></td>
+  <td align="center"><b>Wrong Book</b><br><img src="docs/screenshots/wrongbook.png" width="200"/></td>
+  <td align="center"></td>
+</tr>
+</table>
+
+---
+
 ## 🚀 Quick Start
 
 ### Prerequisites

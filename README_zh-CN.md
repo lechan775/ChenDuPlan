@@ -101,6 +101,29 @@ flowchart LR
 
 ---
 
+
+## 📱 运行截图
+
+<table>
+<tr>
+  <td align="center"><b>登录</b><br><img src="docs/screenshots/login.png" width="200"/></td>
+  <td align="center"><b>注册</b><br><img src="docs/screenshots/register.png" width="200"/></td>
+  <td align="center"><b>背词 (首页 Tab)</b><br><img src="docs/screenshots/home_quiz.png" width="200"/></td>
+</tr>
+<tr>
+  <td align="center"><b>词书</b><br><img src="docs/screenshots/home_books.png" width="200"/></td>
+  <td align="center"><b>背词练习</b><br><img src="docs/screenshots/studypractice.png" width="200"/></td>
+  <td align="center"><b>个人中心 (我的 Tab)</b><br><img src="docs/screenshots/home_profile.png" width="200"/></td>
+</tr>
+<tr>
+  <td align="center"><b>生词本</b><br><img src="docs/screenshots/notebook.png" width="200"/></td>
+  <td align="center"><b>错题本</b><br><img src="docs/screenshots/wrongbook.png" width="200"/></td>
+  <td align="center"></td>
+</tr>
+</table>
+
+---
+
 ## 🚀 快速开始
 
 ### 环境要求
