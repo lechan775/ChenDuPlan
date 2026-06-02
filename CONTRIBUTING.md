@@ -8,7 +8,7 @@ Thank you for your interest in contributing! Here are some guidelines.
 2. Create a feature branch: `git checkout -b feature/my-feature`
 3. Make your changes and commit: `git commit -m "feat: add xxx"`
 4. Push to your fork: `git push origin feature/my-feature`
-5. Open a **Pull Request** to the `main` branch
+5. Open a **Pull Request** to the `master` branch
 
 ## Commit Convention
 
