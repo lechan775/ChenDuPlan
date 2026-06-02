@@ -20,7 +20,7 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @Operation(summary = "用户注册", description = "创建新用户账号，密码使用 SHA-256 哈希存储")
+    @Operation(summary = "用户注册", description = "创建新用户账号，密码使用 BCrypt 哈希存储")
     @PostMapping("/register")
     public Result<UserResponse> register(@Valid @RequestBody RegisterRequest request) {
         return userService.register(request);
